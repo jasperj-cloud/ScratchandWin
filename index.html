@@ -36,6 +36,11 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.globalCompositeOperation = "source-over";
             resultText.innerText = "";
+
+            ctx.font = "20px Arial";
+            ctx.fillStyle = "white";
+            ctx.textAlign = "center";
+            ctx.fillText(selectedPrize, canvas.width / 2, canvas.height / 2);
         }
         
         let isScratching = false;
@@ -61,7 +66,7 @@
         canvas.addEventListener("mouseup", () => { isScratching = false; });
         canvas.addEventListener("mousemove", scratch);
         
-        setTimeout(() => { resultText.innerText = `${selectedPrize}`; }, 5000);
+        setTimeout(() => { resultText.innerText = `${selectedPrize}`; }, 3000);
         
         initializeCanvas();
     </script>
