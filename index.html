@@ -1,1 +1,68 @@
-<hi>Hello World</hi>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scratch & Win</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            border: 2px solid #000;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Scratch & Win</h1>
+    <p>Scratch the card below to reveal your prize!</p>
+    <canvas id="scratchCanvas" width="300" height="150"></canvas>
+    <p id="result"></p>
+    <button onclick="resetCanvas()">Reset</button>
+    
+    <script>
+        const canvas = document.getElementById("scratchCanvas");
+        const ctx = canvas.getContext("2d");
+        const resultText = document.getElementById("result");
+        
+        let prizes = ["$100", "$50", "Try Again", "$10", "Better Luck Next Time"];
+        let selectedPrize = "";
+        
+        function initializeCanvas() {
+            selectedPrize = prizes[Math.floor(Math.random() * prizes.length)];
+            ctx.fillStyle = "gray";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.globalCompositeOperation = "source-over";
+            resultText.innerText = "";
+        }
+        
+        let isScratching = false;
+        
+        function scratch(event) {
+            if (!isScratching) return;
+            let rect = canvas.getBoundingClientRect();
+            let x = event.clientX - rect.left;
+            let y = event.clientY - rect.top;
+            
+            ctx.globalCompositeOperation = "destination-out";
+            ctx.beginPath();
+            ctx.arc(x, y, 15, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+        
+        function resetCanvas() {
+            initializeCanvas();
+        }
+        
+        canvas.addEventListener("mousedown", () => { isScratching = true; });
+        canvas.addEventListener("mouseup", () => { isScratching = false; });
+        canvas.addEventListener("mousemove", scratch);
+        
+        setTimeout(() => { resultText.innerText = `Your prize: ${selectedPrize}`; }, 5000);
+        
+        initializeCanvas();
+    </script>
+</body>
+</html>
