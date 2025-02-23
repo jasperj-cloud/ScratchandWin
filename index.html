@@ -27,7 +27,7 @@
         const ctx = canvas.getContext("2d");
         const resultText = document.getElementById("result");
         
-        let prizes = ["$100", "$50", "Try Again", "$10", "Better Luck Next Time"];
+        let prizes = ["Your Son Jasper says - The only thing better than having you as a Dad is having you as a Grandpa!", "Your Son Jasper says - The only thing better than having you as a Mom is having you as a Grandma!"];
         let selectedPrize = "";
         
         function initializeCanvas() {
@@ -61,7 +61,7 @@
         canvas.addEventListener("mouseup", () => { isScratching = false; });
         canvas.addEventListener("mousemove", scratch);
         
-        setTimeout(() => { resultText.innerText = `Your prize: ${selectedPrize}`; }, 5000);
+        setTimeout(() => { resultText.innerText = `${selectedPrize}`; }, 5000);
         
         initializeCanvas();
     </script>
