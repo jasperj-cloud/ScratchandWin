@@ -18,8 +18,10 @@
 <body>
     <h1>Scratch & Win</h1>
     <p>Scratch the card below to reveal your prize!</p>
-    <canvas id="scratchCanvas" width="300" height="150"></canvas>
-    <p id="result"></p>
+    <canvas id="scratchCanvas" width="300" height="150">
+        <p id="result"></p>
+    </canvas>
+    
     <button onclick="resetCanvas()">Reset</button>
     
     <script>
@@ -66,7 +68,7 @@
         canvas.addEventListener("mouseup", () => { isScratching = false; });
         canvas.addEventListener("mousemove", scratch);
         
-        setTimeout(() => { initializeCanvas();; }, 1000);
+        setTimeout(() => { resultText.innerText = `${selectedPrize}`;; }, 1000);
         
         initializeCanvas();
     </script>
